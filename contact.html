@@ -4,159 +4,427 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - RMR Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         :root {
-            --primary: #0a192f;
-            --secondary: #00b4d8;
-            --text-light: #ccd6f6;
-            --white: #ffffff;
+            --bg: #ffffff;
+            --bg-soft: #f7f8fa;
+            --ink: #0d0d0d;
+            --ink-mid: #555560;
+            --ink-muted: #9999aa;
+            --accent: #1a73e8;
+            --accent-soft: #e8f0fe;
+            --accent-dark: #0d47a1;
+            --green: #12b76a;
+            --green-soft: #ecfdf5;
+            --border: rgba(0,0,0,0.07);
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --radius-xl: 32px;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            line-height: 1.6;
-            background-color: #f4f7f6;
-            color: #333;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
         }
 
+        /* ── NAV ── */
         nav {
-            background: var(--primary);
-            padding: 1rem 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 6%;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 66px;
         }
-
         .logo {
-            color: var(--white);
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800; font-size: 1.2rem;
+            letter-spacing: 0.02em; color: var(--ink);
+            text-decoration: none; display: flex; align-items: center; gap: 10px;
+        }
+        .logo-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--accent); display: inline-block;
+        }
+        .nav-links { display: flex; align-items: center; gap: 6px; }
+        .nav-links a {
+            color: var(--ink-mid); text-decoration: none;
+            padding: 7px 16px; border-radius: 50px;
+            font-size: 0.9rem; font-weight: 400;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-links a:hover { background: var(--bg-soft); color: var(--ink); }
+        .nav-links a.active { color: var(--ink); font-weight: 500; }
+        .nav-cta {
+            background: var(--ink) !important; color: #fff !important;
+            font-weight: 500 !important;
+        }
+        .nav-cta:hover { background: #222 !important; }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: var(--bg-soft);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 8% 52px;
+        }
+        .page-header-inner { max-width: 780px; margin: 0 auto; }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--ink-mid); text-decoration: none;
+            font-size: 0.85rem; margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--ink); }
+        .badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--accent-soft); color: var(--accent-dark);
+            font-size: 0.78rem; font-weight: 500;
+            padding: 5px 13px; border-radius: 50px;
+            margin-bottom: 20px; letter-spacing: 0.03em;
+        }
+        .page-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.6rem; font-weight: 800;
+            line-height: 1.1; letter-spacing: -0.02em;
+            color: var(--ink); margin-bottom: 12px;
+        }
+        .page-header p {
+            font-size: 1rem; color: var(--ink-mid);
+            font-weight: 300; line-height: 1.7;
         }
 
-        .container {
-            max-width: 700px;
-            margin: 60px auto;
-            padding: 40px;
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        /* ── MAIN CONTENT ── */
+        .content-wrap {
+            max-width: 780px; margin: 0 auto;
+            padding: 60px 8% 100px;
+            flex: 1;
         }
 
-        h1 { color: var(--primary); text-align: center; }
-
-        form { display: flex; flex-direction: column; gap: 20px; }
-
-        .form-group { display: flex; flex-direction: column; gap: 8px; }
-
-        input, textarea {
-            padding: 12px;
-            border: 2px solid #e1e1e1;
-            border-radius: 8px;
-            font-size: 1rem;
+        /* ── FORM CARD ── */
+        .form-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 48px 52px;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.05);
         }
+
+        .form-grid { display: flex; flex-direction: column; gap: 22px; }
+
+        .form-group { display: flex; flex-direction: column; gap: 7px; }
+
+        .form-group label {
+            font-size: 0.85rem; font-weight: 500;
+            color: var(--ink); letter-spacing: 0.01em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 13px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; color: var(--ink);
+            background: var(--bg-soft);
+            transition: border-color 0.2s, background 0.2s;
+            outline: none;
+            resize: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            background: #fff;
+        }
+
+        .form-group textarea { min-height: 140px; }
 
         .btn-send {
-            background: var(--secondary);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
+            background: var(--ink); color: #fff;
+            padding: 15px 32px; border: none;
+            border-radius: 50px; font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; font-weight: 500;
+            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex; align-items: center; gap: 10px;
+            align-self: flex-start; margin-top: 6px;
+        }
+        .btn-send:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        .btn-send:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* spinner */
+        .spinner {
+            width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff; border-radius: 50%;
+            animation: spin 0.7s linear infinite; display: none;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── SUCCESS OVERLAY ── */
+        .success-screen {
+            display: none; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 20px 0;
+        }
+        .success-icon {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: var(--green-soft); display: flex;
+            align-items: center; justify-content: center; margin-bottom: 24px;
+        }
+        .success-icon svg { width: 36px; height: 36px; color: var(--green); }
+        .success-screen h2 {
+            font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800;
+            color: var(--ink); margin-bottom: 10px;
+        }
+        .success-screen p {
+            font-size: 0.95rem; color: var(--ink-mid);
+            font-weight: 300; line-height: 1.7; max-width: 340px;
+        }
+        .progress-bar-wrap {
+            width: 100%; max-width: 280px; height: 3px;
+            background: var(--border); border-radius: 99px;
+            margin-top: 28px; overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%; background: var(--green);
+            border-radius: 99px; width: 0%;
+            transition: width 2.8s linear;
+        }
+        .redirect-note {
+            font-size: 0.78rem; color: var(--ink-muted);
+            margin-top: 10px;
         }
 
-        .btn-send:hover { background: #0096b1; }
+        /* ── INFO STRIP ── */
+        .info-strip {
+            display: flex; gap: 16px; margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .info-item {
+            flex: 1; min-width: 160px;
+            background: var(--bg-soft); border: 1px solid var(--border);
+            border-radius: var(--radius-md); padding: 18px 20px;
+            display: flex; gap: 12px; align-items: flex-start;
+        }
+        .info-item-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            background: var(--accent-soft); display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .info-item-icon svg { width: 18px; height: 18px; color: var(--accent); }
+        .info-item h5 {
+            font-family: 'Syne', sans-serif; font-size: 0.82rem;
+            font-weight: 700; color: var(--ink); margin-bottom: 2px;
+        }
+        .info-item p { font-size: 0.8rem; color: var(--ink-muted); font-weight: 300; }
 
-        .back-home { display: inline-block; margin-bottom: 20px; color: var(--secondary); text-decoration: none; }
-        
-        /* Style dyal l-Loading status */
-        #status {
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-            display: none; /* Makhfiy f l-bdia */
+        /* ── ERROR MSG ── */
+        .error-msg {
+            font-size: 0.85rem; color: #dc2626;
+            background: #fef2f2; border: 1px solid #fecaca;
+            border-radius: var(--radius-md); padding: 12px 16px;
+            display: none;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--bg-soft); border-top: 1px solid var(--border);
+            padding: 30px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.8rem; color: var(--ink-muted);
+        }
+        footer a { color: var(--ink-muted); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+        .footer-links { display: flex; gap: 20px; }
+
+        @media (max-width: 700px) {
+            .page-header h1 { font-size: 1.9rem; }
+            .nav-links { display: none; }
+            .form-card { padding: 32px 24px; }
+            footer { flex-direction: column; gap: 12px; text-align: center; }
+            .btn-send { align-self: stretch; justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">RMR SOLUTIONS</a>
-    </nav>
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="logo">
+        <span class="logo-dot"></span>RMR Solutions
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="contact.html" class="nav-cta active">Contact</a>
+    </div>
+</nav>
 
-    <div class="container">
-        <a href="index.html" class="back-home">&larr; Back to Home</a>
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div class="page-header-inner">
+        <a href="index.html" class="back-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Back to Home
+        </a>
+        <div class="badge">Support</div>
         <h1>Get in Touch</h1>
-        
-        <form id="my-form" action="https://formspree.io/f/mdabgkkz" method="POST">
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" name="name" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" required>
-            </div>
+        <p>We read every message and respond personally. Usually within 24 hours.</p>
+    </div>
+</div>
 
-            <div class="form-group">
-                <label>Message</label>
-                <textarea name="message" required></textarea>
-            </div>
+<!-- CONTENT -->
+<div class="content-wrap">
 
-            <button id="my-form-button" type="submit" class="btn-send">Send Message</button>
-            <p id="status"></p>
-        </form>
+    <!-- Info strip -->
+    <div class="info-strip">
+        <div class="info-item">
+            <div class="info-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+                <h5>Email</h5>
+                <p>support@rmr.com</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+                <h5>Response Time</h5>
+                <p>Within 24 hours</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+                <h5>Support</h5>
+                <p>Apps & general inquiries</p>
+            </div>
+        </div>
     </div>
 
-    <!-- SCRIPT BACH Y-CATCHER L-SEND -->
-    <script>
-        var form = document.getElementById("my-form");
-        
-        async function handleSubmit(event) {
-          event.preventDefault();
-          var status = document.getElementById("status");
-          var data = new FormData(event.target);
-          
-          // N-biyen beli kankhdmo
-          status.style.display = "block";
-          status.innerHTML = "Sending...";
-          status.style.color = "orange";
+    <!-- Form card -->
+    <div class="form-card">
 
-          fetch(event.target.action, {
-            method: form.method,
-            body: data,
-            headers: {
-                'Accept': 'application/json'
-            }
-          }).then(response => {
+        <!-- Form view -->
+        <div id="form-view">
+            <form id="my-form" action="https://formspree.io/f/mdabgkkz" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us how we can help…" required></textarea>
+                    </div>
+                    <div id="error-msg" class="error-msg">Something went wrong. Please try again.</div>
+                    <button id="send-btn" type="submit" class="btn-send">
+                        <span id="btn-label">Send Message</span>
+                        <div class="spinner" id="spinner"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Success view -->
+        <div id="success-view" class="success-screen">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2>Message sent!</h2>
+            <p>Thanks for reaching out. We'll get back to you at your email address within 24 hours.</p>
+            <div class="progress-bar-wrap">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p class="redirect-note">Redirecting you to the home page…</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 RMR Solutions. All rights reserved.</span>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</footer>
+
+<script>
+    var form = document.getElementById("my-form");
+    var btn = document.getElementById("send-btn");
+    var spinner = document.getElementById("spinner");
+    var btnLabel = document.getElementById("btn-label");
+    var errorMsg = document.getElementById("error-msg");
+    var formView = document.getElementById("form-view");
+    var successView = document.getElementById("success-view");
+    var progressBar = document.getElementById("progress-bar");
+
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        errorMsg.style.display = "none";
+        btn.disabled = true;
+        btnLabel.textContent = "Sending…";
+        spinner.style.display = "block";
+
+        try {
+            var data = new FormData(form);
+            var response = await fetch(form.action, {
+                method: "POST",
+                body: data,
+                headers: { "Accept": "application/json" }
+            });
+
             if (response.ok) {
-              // ILA MCHA L-MESSAGE:
-              status.innerHTML = "Success! Redirecting...";
-              status.style.color = "green";
-              alert("Thank you! Your message has been sent successfully."); // Pop-up
-              window.location.href = "index.html"; // Redirect l-Home
+                formView.style.display = "none";
+                successView.style.display = "flex";
+                setTimeout(function() {
+                    progressBar.style.width = "100%";
+                }, 50);
+                setTimeout(function() {
+                    window.location.href = "index.html";
+                }, 3000);
             } else {
-              response.json().then(data => {
-                if (Object.hasOwn(data, 'errors')) {
-                  status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                } else {
-                  status.innerHTML = "Oops! There was a problem submitting your form";
-                }
-                status.style.color = "red";
-              })
+                var json = await response.json();
+                var msg = json.errors ? json.errors.map(function(e){ return e.message; }).join(", ") : "Something went wrong. Please try again.";
+                errorMsg.textContent = msg;
+                errorMsg.style.display = "block";
+                btn.disabled = false;
+                btnLabel.textContent = "Send Message";
+                spinner.style.display = "none";
             }
-          }).catch(error => {
-            status.innerHTML = "Oops! There was a problem submitting your form";
-            status.style.color = "red";
-          });
+        } catch(err) {
+            errorMsg.textContent = "Network error. Please check your connection and try again.";
+            errorMsg.style.display = "block";
+            btn.disabled = false;
+            btnLabel.textContent = "Send Message";
+            spinner.style.display = "none";
         }
-        form.addEventListener("submit", handleSubmit)
-    </script>
+    });
+</script>
 
 </body>
 </html>
