@@ -13,21 +13,19 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             line-height: 1.6;
             background-color: #f4f7f6;
             color: #333;
         }
 
-        /* Navigation */
         nav {
             background: var(--primary);
             padding: 1rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .logo {
@@ -46,52 +44,17 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        h1 {
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 10px;
-        }
+        h1 { color: var(--primary); text-align: center; }
 
-        p.subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 40px;
-        }
+        form { display: flex; flex-direction: column; gap: 20px; }
 
-        /* Form Styling */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        label {
-            font-weight: 600;
-            color: var(--primary);
-        }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
 
         input, textarea {
             padding: 12px;
             border: 2px solid #e1e1e1;
             border-radius: 8px;
             font-size: 1rem;
-            transition: 0.3s;
-            outline: none;
-        }
-
-        input:focus, textarea:focus {
-            border-color: var(--secondary);
-        }
-
-        textarea {
-            height: 150px;
-            resize: vertical;
         }
 
         .btn-send {
@@ -104,29 +67,18 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            margin-top: 10px;
         }
 
-        .btn-send:hover {
-            background: #0096b1;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
-        }
+        .btn-send:hover { background: #0096b1; }
 
-        .back-home {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        footer {
+        .back-home { display: inline-block; margin-bottom: 20px; color: var(--secondary); text-decoration: none; }
+        
+        /* Style dyal l-Loading status */
+        #status {
             text-align: center;
-            padding: 30px;
-            color: #8892b0;
-            background: var(--primary);
-            margin-top: 60px;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none; /* Makhfiy f l-bdia */
         }
     </style>
 </head>
@@ -139,32 +91,72 @@
     <div class="container">
         <a href="index.html" class="back-home">&larr; Back to Home</a>
         <h1>Get in Touch</h1>
-        <p class="subtitle">Have a question about our apps? Send us a message and we'll get back to you as soon as possible.</p>
         
-        <!-- Form m-connecté m3a Formspree dyalk -->
-        <form action="https://formspree.io/f/mdabgkkz" method="POST">
+        <form id="my-form" action="https://formspree.io/f/mdabgkkz" method="POST">
             <div class="form-group">
-                <label for="full-name">Full Name</label>
-                <input type="text" id="full-name" name="name" placeholder="Your Name" required>
+                <label>Full Name</label>
+                <input type="text" name="name" required>
             </div>
             
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                <label>Email Address</label>
+                <input type="email" name="email" required>
             </div>
 
             <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+                <label>Message</label>
+                <textarea name="message" required></textarea>
             </div>
 
-            <button type="submit" class="btn-send">Send Message</button>
+            <button id="my-form-button" type="submit" class="btn-send">Send Message</button>
+            <p id="status"></p>
         </form>
     </div>
 
-    <footer>
-        &copy; 2026 RMR Solutions. All rights reserved.
-    </footer>
+    <!-- SCRIPT BACH Y-CATCHER L-SEND -->
+    <script>
+        var form = document.getElementById("my-form");
+        
+        async function handleSubmit(event) {
+          event.preventDefault();
+          var status = document.getElementById("status");
+          var data = new FormData(event.target);
+          
+          // N-biyen beli kankhdmo
+          status.style.display = "block";
+          status.innerHTML = "Sending...";
+          status.style.color = "orange";
+
+          fetch(event.target.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+          }).then(response => {
+            if (response.ok) {
+              // ILA MCHA L-MESSAGE:
+              status.innerHTML = "Success! Redirecting...";
+              status.style.color = "green";
+              alert("Thank you! Your message has been sent successfully."); // Pop-up
+              window.location.href = "index.html"; // Redirect l-Home
+            } else {
+              response.json().then(data => {
+                if (Object.hasOwn(data, 'errors')) {
+                  status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                } else {
+                  status.innerHTML = "Oops! There was a problem submitting your form";
+                }
+                status.style.color = "red";
+              })
+            }
+          }).catch(error => {
+            status.innerHTML = "Oops! There was a problem submitting your form";
+            status.style.color = "red";
+          });
+        }
+        form.addEventListener("submit", handleSubmit)
+    </script>
 
 </body>
 </html>
