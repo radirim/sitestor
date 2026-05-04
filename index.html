@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
@@ -68,7 +68,6 @@
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 20px;
-            animation: fadeIn 1s ease-in;
         }
 
         .hero p {
@@ -96,24 +95,7 @@
             box-shadow: 0 6px 20px rgba(0, 180, 216, 0.6);
         }
 
-        /* Stats Section */
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            padding: 50px 10%;
-            background: var(--white);
-            margin-top: -50px;
-            border-radius: 10px;
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .stat-item h3 { color: var(--secondary); font-size: 2rem; margin: 0; }
-        .stat-item p { margin: 5px 0 0; font-weight: bold; }
-
-        /* Services / What We Do */
+        /* Services Section */
         .section { padding: 80px 10%; }
         .section-header { text-align: center; margin-bottom: 60px; }
         .section-header h2 { font-size: 2.2rem; color: var(--primary); }
@@ -129,30 +111,40 @@
             padding: 40px;
             border-radius: 15px;
             transition: 0.3s;
-            border-bottom: 5px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            border-bottom: 5px solid var(--secondary);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transform: translateY(-5px);
         }
 
-        .card h3 { color: var(--primary); margin-bottom: 15px; }
-
-        /* About Section */
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
+        /* Contact CTA Section */
+        .contact-cta {
             background: var(--primary);
             color: white;
-            padding: 80px 10%;
-            border-radius: 0 100px 0 100px;
+            padding: 60px 10%;
+            text-align: center;
+            border-radius: 20px;
+            width: 80%;
+            margin: 40px auto;
         }
 
-        .about-text { flex: 1; }
-        .about-text h2 { color: var(--secondary); font-size: 2rem; }
+        .btn-outline {
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
 
         /* Footer */
         footer {
@@ -160,92 +152,75 @@
             color: #8892b0;
             padding: 50px 10% 20px;
             text-align: center;
+            border-top: 1px solid #112240;
         }
 
-        .footer-links { margin-bottom: 30px; }
-        .footer-links a { color: var(--white); text-decoration: none; margin: 0 15px; font-size: 0.9rem; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .footer-links { margin-bottom: 20px; }
+        .footer-links a { color: var(--white); text-decoration: none; margin: 0 15px; }
 
         @media (max-width: 768px) {
-            .about-content { flex-direction: column; text-align: center; }
-            .stats { flex-direction: column; gap: 30px; text-align: center; }
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav>
         <a href="index.html" class="logo">RMR SOLUTIONS</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="#services">Services</a>
             <a href="privacy.html">Privacy Policy</a>
-            <a href="#contact">Contact Us</a>
+            <a href="contact.html">Contact Us</a> <!-- Hada ghadi ydi l-user l-page contact.html -->
         </div>
     </nav>
 
+    <!-- Hero -->
     <header class="hero">
-        <h1>Empowering Mobile Experiences</h1>
-        <p>RMR Solutions delivers high-performance, secure, and intuitive Android applications. We turn complex ideas into seamless digital realities for users worldwide.</p>
-        <a href="https://play.google.com/store/apps/dev?id=YOUR_ID" target="_blank" class="btn-main">EXPLORE OUR APPS</a>
+        <h1>Innovative Mobile Apps Built for the Modern World</h1>
+        <p>RMR Solutions is a mobile application development company focused on creating reliable, user-friendly Android applications that improve everyday digital experiences.</p>
+        <a href="https://play.google.com/store/apps/dev?id=YOUR_ID" class="btn-main">VIEW OUR APPS ON GOOGLE PLAY</a>
     </header>
 
-    <div class="stats">
-        <div class="stat-item"><h3>1M+</h3><p>Downloads</p></div>
-        <div class="stat-item"><h3>4.8</h3><p>Avg Rating</p></div>
-        <div class="stat-item"><h3>10+</h3><p>Pro Apps</p></div>
-        <div class="stat-item"><h3>24/7</h3><p>Support</p></div>
-    </div>
-
+    <!-- What We Do -->
     <section class="section" id="services">
         <div class="section-header">
-            <h2>Our Core Expertise</h2>
-            <p>Specializing in modern technologies like Kotlin and Jetpack Compose.</p>
+            <h2>What We Do</h2>
+            <p>We develop Android applications designed to be simple, efficient, and useful for everyday users.</p>
         </div>
         <div class="grid">
             <div class="card">
-                <h3>Utility Applications</h3>
-                <p>We build tools that solve real problems, from system optimizers to hardware-integrated utilities.</p>
+                <h3>Mobile Development</h3>
+                <p>Building scalable and robust applications tailored for the Android ecosystem.</p>
             </div>
             <div class="card">
-                <h3>Smart Connectivity</h3>
-                <p>Expertise in remote control protocols, IoT integration, and cross-device communication (TV, Mobile, Console).</p>
+                <h3>App Optimization</h3>
+                <p>Ensuring fast load times, minimal battery drain, and smooth performance.</p>
             </div>
             <div class="card">
-                <h3>Clean Architecture</h3>
-                <p>Our apps are built with the latest industry standards to ensure stability, speed, and long-term security.</p>
+                <h3>User-Focused Design</h3>
+                <p>Crafting intuitive interfaces that make navigation effortless.</p>
             </div>
         </div>
     </section>
 
-    <section class="about-content">
-        <div class="about-text">
-            <h2>Why Choose RMR Solutions?</h2>
-            <p>At RMR Solutions, we don't just write code; we design experiences. Our development process focuses on "User-First" design, ensuring that every interaction is smooth and every feature is purposeful. We prioritize privacy, performance, and accessibility in every product we launch on the Google Play Store.</p>
-        </div>
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <h2>Have a Question or Need Support?</h2>
+        <p>Our team is here to help you with any inquiries regarding our applications.</p>
+        <a href="contact.html" class="btn-outline">CONTACT US NOW</a> <!-- Lien akhor l-page contact -->
     </section>
 
-    <section class="section" id="contact" style="text-align: center;">
-        <div class="section-header">
-            <h2>Get In Touch</h2>
-            <p>Have questions about our apps or need support?</p>
-        </div>
-        <div style="background: white; padding: 40px; border-radius: 15px; display: inline-block; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-            <p><strong>Official Support:</strong></p>
-            <p style="font-size: 1.2rem; color: var(--secondary);">support@rmr.com</p>
-            <p>Our team typically responds within 24-48 hours.</p>
-        </div>
-    </section>
-
+    <!-- Footer -->
     <footer>
         <div class="footer-links">
-            <a href="index.html">Home</a> | 
-            <a href="privacy.html">Privacy Policy</a> | 
-            <a href="#services">Services</a>
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contact.html">Contact Us</a>
         </div>
-        <p>&copy; 2026 RMR Solutions. All rights reserved. <br> 
-        Building the future of mobile software.</p>
+        <p>&copy; 2026 RMR Solutions. All rights reserved.</p>
     </footer>
 
 </body>
