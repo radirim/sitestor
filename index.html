@@ -21,6 +21,8 @@
             --accent-dark: #0d47a1;
             --green: #12b76a;
             --green-soft: #ecfdf5;
+            --amber: #b45309;
+            --amber-soft: #fef3c7;
             --border: rgba(0,0,0,0.07);
             --radius-sm: 8px;
             --radius-md: 14px;
@@ -37,6 +39,22 @@
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
         }
+
+        /* ── TERMS BAR ── */
+        .terms-bar {
+            background: var(--ink); color: rgba(255,255,255,0.72);
+            font-size: 0.83rem; line-height: 1.7;
+            padding: 11px 6%; text-align: center;
+        }
+        .terms-bar strong { color: #fff; font-weight: 600; }
+        .terms-bar a {
+            color: #fff; text-decoration: underline;
+            text-decoration-color: rgba(255,255,255,0.35);
+            text-underline-offset: 3px; white-space: nowrap;
+            transition: text-decoration-color 0.2s;
+        }
+        .terms-bar a:hover { text-decoration-color: #fff; }
+        .terms-bar .sep { opacity: 0.35; margin: 0 6px; }
 
         /* ── NAV ── */
         nav {
@@ -167,7 +185,6 @@
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
             text-align: center;
         }
-        .stat-item {}
         .stat-num {
             font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
             color: var(--ink); line-height: 1;
@@ -256,13 +273,15 @@
             transition: box-shadow 0.25s, transform 0.25s;
             text-decoration: none; color: inherit;
         }
-        .app-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.07); transform: translateY(-3px); }
+        a.app-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.07); transform: translateY(-3px); }
         .app-icon {
             width: 64px; height: 64px; border-radius: 16px;
             background: var(--bg-soft); flex-shrink: 0; overflow: hidden;
             border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
         }
         .app-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .app-icon svg { width: 30px; height: 30px; color: var(--ink-mid); }
         .app-info h4 {
             font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700;
             color: var(--ink); margin-bottom: 6px;
@@ -274,10 +293,13 @@
             background: var(--bg-soft); color: var(--ink-mid);
             border: 1px solid var(--border); font-weight: 400;
         }
+        .tag-soon { background: var(--amber-soft); color: var(--amber); border-color: transparent; font-weight: 500; }
         .app-link {
             display: inline-block; margin-top: 14px;
             font-size: 0.85rem; font-weight: 500; color: var(--accent);
         }
+        .app-link-muted { color: var(--ink-muted); }
+        .app-card.soon { background: rgba(255,255,255,0.7); }
 
         /* ── TECH STACK ── */
         .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -323,7 +345,7 @@
             gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border);
         }
         .footer-brand p { color: var(--ink-muted); font-size: 0.88rem; max-width: 280px; margin-top: 10px; }
-        .footer-links-group { display: flex; gap: 60px; }
+        .footer-links-group { display: flex; gap: 60px; flex-wrap: wrap; }
         .footer-col h6 {
             font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem;
             letter-spacing: 0.05em; color: var(--ink); margin-bottom: 14px;
@@ -360,6 +382,13 @@
     </style>
 </head>
 <body>
+
+<!-- TERMS OF USE BAR -->
+<div class="terms-bar" id="terms">
+    <strong>Terms of Use:</strong> by downloading or using any RMR Solutions app, you agree to the Terms of Use of that app —
+    <a href="terms.scoterapp.html">Ride Manager for KuKirin</a><span class="sep">·</span><a href="terms.airpro.html">AirPro Pods</a><span class="sep">·</span><a href="terms.usbcamera.html">USB Camera</a><span class="sep">·</span><a href="terms.projector.html">Projector Remote Control</a><span class="sep">·</span><a href="terms.sharelocation.html">Share Location</a>
+    — so please read the terms of the app you use before getting started.
+</div>
 
 <!-- NAV -->
 <nav>
@@ -400,14 +429,14 @@
                         <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-1C2.67 17 2 17.67 2 18.5v5c0 .83.67 1.5 1.5 1.5S5 24.33 5 23.5v-5C5 17.67 4.33 17 3.5 17zm17 0c-.83 0-1.5.67-1.5 1.5v5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5zm-4.97-12.6l1.53-1.53c.19-.19.19-.51 0-.7-.19-.19-.51-.19-.7 0l-1.75 1.75C14.24 3.35 13.14 3 12 3s-2.24.35-3.11.92L7.14 2.17c-.19-.19-.51-.19-.7 0-.19.19-.19.51 0 .7l1.53 1.53C6.69 5.54 6 7.17 6 9h12c0-1.83-.69-3.46-1.97-4.6z"/></svg>
                     </div>
                     <div class="phone-title">RMR Solutions</div>
-                    <div class="phone-sub">4 apps on Google Play</div>
+                    <div class="phone-sub">3 apps live · 2 coming soon</div>
                 </div>
             </div>
             <div class="floating-badge">
                 <div class="stat-dot"></div>
                 <div>
-                    <div style="font-size:0.72rem;color:#888;line-height:1;">Published apps</div>
-                    <div style="font-weight:700;font-size:0.95rem;">4 on Google Play</div>
+                    <div style="font-size:0.72rem;color:#888;line-height:1;">Live on Google Play</div>
+                    <div style="font-weight:700;font-size:0.95rem;">3 apps</div>
                 </div>
             </div>
         </div>
@@ -419,8 +448,12 @@
 <div class="stats-bar">
     <div class="stats-inner">
         <div class="stat-item">
-            <div class="stat-num">4</div>
-            <div class="stat-label">Apps on Google Play</div>
+            <div class="stat-num">3</div>
+            <div class="stat-label">Live on Google Play</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">2</div>
+            <div class="stat-label">Coming soon</div>
         </div>
         <div class="stat-item">
             <div class="stat-num">100%</div>
@@ -428,11 +461,7 @@
         </div>
         <div class="stat-item">
             <div class="stat-num">Everyone</div>
-            <div class="stat-label">Content rating on all apps</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num">Oct 2026</div>
-            <div class="stat-label">Latest updates shipped</div>
+            <div class="stat-label">Content rating on live apps</div>
         </div>
     </div>
 </div>
@@ -520,7 +549,7 @@
                     </li>
                     <li>
                         <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-                        Clear privacy policy for every app
+                        Clear privacy policy and Terms of Use for every app
                     </li>
                 </ul>
             </div>
@@ -539,7 +568,7 @@
                 </div>
                 <div class="about-card" style="grid-column:span 2;">
                     <h4>Policy & Trust</h4>
-                    <p>Every app ships with a clear privacy policy, minimal permissions, and honest data practices.</p>
+                    <p>Every app ships with a clear privacy policy, Terms of Use, minimal permissions, and honest data practices.</p>
                 </div>
             </div>
         </div>
@@ -552,25 +581,9 @@
         <div class="section-head">
             <div class="section-tag">Our Apps</div>
             <h2 class="section-title">What We've Built</h2>
-            <p class="section-sub">Android applications developed and maintained by RMR Solutions, available on Google Play.</p>
+            <p class="section-sub">Android applications developed and maintained by RMR Solutions.</p>
         </div>
         <div class="apps-grid">
-
-            <a class="app-card" href="https://play.google.com/store/apps/details?id=com.apple.smartwatchsync" target="_blank" rel="noopener">
-                <div class="app-icon">
-                    <img src="https://play-lh.googleusercontent.com/QXPXTHvIOhmyqQcyFE-kp0P89Dsxp0YT8-ui_qGONVc3PDLx2u2Ph3oqqnH0Dz0Lg5o432oeZWWJP391xZ_k=s128" alt="Apple Watch for Android icon" loading="lazy">
-                </div>
-                <div class="app-info">
-                    <h4>Apple Watch for Android</h4>
-                    <p>Connect your phone to any smartwatch via Bluetooth. Get call and message notifications, track steps, heart rate and sleep, and control music from your wrist.</p>
-                    <div class="app-tags">
-                        <span class="tag">Tools</span>
-                        <span class="tag">Bluetooth</span>
-                        <span class="tag">Everyone</span>
-                    </div>
-                    <span class="app-link">Get it on Google Play →</span>
-                </div>
-            </a>
 
             <a class="app-card" href="https://play.google.com/store/apps/details?id=com.rmrsolutions.usbcamera" target="_blank" rel="noopener">
                 <div class="app-icon">
@@ -619,6 +632,37 @@
                     <span class="app-link">Get it on Google Play →</span>
                 </div>
             </a>
+
+            <div class="app-card soon">
+                <div class="app-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17h4l3-8h3"/><path d="M13 9l2-3h2"/></svg>
+                </div>
+                <div class="app-info">
+                    <h4>Ride Manager for KuKirin</h4>
+                    <p>A companion app for managing your electric scooter rides. Independent app, not affiliated with or endorsed by KuKirin.</p>
+                    <div class="app-tags">
+                        <span class="tag tag-soon">Coming soon</span>
+                        <span class="tag">Tools</span>
+                    </div>
+                    <span class="app-link app-link-muted">Not yet on Google Play</span>
+                </div>
+            </div>
+
+            <div class="app-card soon">
+                <div class="app-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="14" width="5" height="7" rx="2"/><rect x="17" y="14" width="5" height="7" rx="2"/></svg>
+                </div>
+                <div class="app-info">
+                    <h4>AirPro Pods: Battery &amp; Finder</h4>
+                    <p>Keep an eye on your wireless earbuds' battery and find them when they go missing. Independent app, not affiliated with any earbud brand.</p>
+                    <div class="app-tags">
+                        <span class="tag tag-soon">Coming soon</span>
+                        <span class="tag">Tools</span>
+                        <span class="tag">Bluetooth</span>
+                    </div>
+                    <span class="app-link app-link-muted">Not yet on Google Play</span>
+                </div>
+            </div>
 
         </div>
         <div style="text-align:center;margin-top:36px;">
@@ -699,6 +743,14 @@
                 <a href="#services">Services</a>
                 <a href="#about">About</a>
                 <a href="#apps">Our Apps</a>
+            </div>
+            <div class="footer-col">
+                <h6>Terms of Use</h6>
+                <a href="terms.scoterapp.html">Ride Manager for KuKirin</a>
+                <a href="terms.airpro.html">AirPro Pods</a>
+                <a href="terms.usbcamera.html">USB Camera</a>
+                <a href="terms.projector.html">Projector Remote Control</a>
+                <a href="terms.sharelocation.html">Share Location</a>
             </div>
             <div class="footer-col">
                 <h6>Legal</h6>
